@@ -1,0 +1,45 @@
+---
+layout: post
+title:  "WWDC"
+date:   2016-06-28 18:24:27 -0700
+tag: "#Tech #WWDC #Apple"
+id: "6"
+---
+
+On the 13th of May 2016, the WWDC16 started. I spend one day there on Thursday 16th May.
+
+![WWDC]({{ site.url }}/assets/wwdc1.jpg)
+
+## WWD-What?
+
+Every year since 1997, Apple organizes the WWDC which stands for WorldWide Developer Conference. It lasts one week from Monday to Friday. It starts with a presentation (a.k.a the Keynote) with Apple's executives. On this occasion, Apple introduces some new things. Sometimes products, but most of the time (since it's a developer conference), they present new software.
+
+It's funny to see some of the people you already crossed in the office, talking on stage. Then, you realized that this one guy is the one who leads the whole project you work on, but you didn't know that back to when you met him...
+
+## Where
+
+This conference is held in San Francisco, in the Moscone Center. They decorate the whole building to show on this occasion. This is pretty nice actually. The WWDC isn't free. It costs around $1500 to attend the whole week. They used to sell the 5000 places in a few minutes so for several years now, you have to go through a lottery and pray to get a pass (and pay the $1500 🤑).
+
+![WWDC]({{ site.url }}/assets/wwdc2.jpg)
+
+## What's new?
+
+I won't write an article about what Apple just released, but I need to sum up what's new. Apple presented new version of their platforms. They've been updating iOS (for iPhone and iPad), watchOS (for the Apple Watch), tvOS (for the AppleTV) and macOS (previously Mac OS X) for their computers. This means that they added new features such as in the message app of iOS 10, or bring performance improvement for watchOS 3 and so on. If you want to learn more about what's new, it's go [here](http://www.macrumors.com/roundup/wwdc/).
+
+Everything Apple presented is available for registered developer only. Public version will be available next fall.
+
+## What about the rest of the week
+
+### Session
+They present new stuff on Monday, and then they bring up engineers on stage so they can show, and explain the new features and how developer can take advantage of those in their own app. For instance, this year, they bring SiriKit which allows a third-party developer (a developer that develops on app which run on Apple's platform) to integrate Siri into his/her app. Hence, (if Facebook moves to it for instance), you would be able to tell Siri:
+
+> Say Hello to John Appleseed using Messenger!
+
+### Labs
+There are also labs where you can come as a developer and ask specific questions to Apple's engineers so they can help you debug your app and solve some problems you have.
+
+![WWDC]({{ site.url }}/assets/wwdc4.jpg)
+
+## My Day
+
+Sometimes interns can go to the whole WWDC week, I went there for one day, but still, I am very happy :). I attended several sessions about new features such as SiriKit that I mentioned before but also about watchOS performance best practices. I had a sweat day. It's pretty awesome to attend the WWDC and also to go the SF.
