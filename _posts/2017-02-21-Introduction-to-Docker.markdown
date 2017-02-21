@@ -18,15 +18,15 @@ Now think of a large and complex system that you want to deploy on a new server.
 
 ## How?
 
-First you need to install Docker on your system (https://docs.docker.com/engine/installation/linux/) for Linux system, here for macOS (https://www.docker.com/products/docker#/mac).
+First you need to install Docker on your system ([Linux](https://docs.docker.com/engine/installation/linux/), [macOS](https://www.docker.com/products/docker#/mac)).
 
 Now lets see how we can use Docker. Docker use containers to run. A container is an instance of Docker that execute processes on a defined environment. To define an environment, you need to start from a base image. Docker provide you with some base image such as an nginx server, an Ubuntu system, a Ruby environment and so on.
 
 ### Running your first container
 
-```
+{% highlight bash %}
 docker run -it ubuntu bash
-```
+{% endhighlight %}
 
 There you are, you are now on a Ubuntu system like, on your machine. Some of the basic commands are missing but you can install them using ```apt-get```.
 
@@ -36,32 +36,32 @@ There you are, you are now on a Ubuntu system like, on your machine. Some of the
 
 You can redirect the traffic from a given host port to your container port using the ```-p``` option. For instance, lets say that my app is running on port 9000 of my container. I want to bind the port 9000 of my host machine to the port 80 of my container. I just use ```-p HOST_PORT:CONTAINER_PORT```
 
-```
+{% highlight bash %}
 # On your host machine
 docker run -p 9000:80 nginx
-```
+{% endhighlight %}
 
-And then open your favorite web browser and go to http://localhost:9000/. You should see the nginx default page.
+And then open your favorite web browser and go to [http://localhost:9000/](http://localhost:9000/). You should see the nginx default page.
 
 ### Demonize the container
 
 We ran a nginx container in foreground in the previous example. Most of the time, we like that our web server run as a daemon. To do so, you can start containers as daemon using the ```-d``` option. Now, you can run
 
-```
+{% highlight bash %}
 # On your host machine
 docker run -d -p 9000:80 nginx
-```
+{% endhighlight %}
 
 Docker answer with a long id. It's the unique id of your container. Now lets go into the system. We are going to execute a bash process onto our nginx container. Then we will create a simple web page directly onto the container. But how do we access our container while it's already running?
 
-```
+{% highlight bash %}
 # On your host machine
 docker exec -it <CONTAINER_ID> bash
-```
+{% endhighlight %}
 
 We now have access to a shell running on our nginx container. Lets go in the ```/usr/share/nginx/html``` repertory. Install your favorite shell text editor and create a small html page in test.html.
 
-Then go to http://localhost:9000/test.html you should see your awesome web page.
+Then go to [http://localhost:9000/test.html](http://localhost:9000/test.html) you should see your awesome web page.
 
 ### Sharing files between Host and Container
 
@@ -71,55 +71,56 @@ To do so, just use the ```-v``` option as follow : ```-v host_dir:container_dir`
 
 For instance, go to your home dir on your host machine and run the following :
 
-```
+{% highlight bash %}
 # On your host machine
 docker run -it -v $PWD:/host ubuntu bash
-```
+{% endhighlight %}
 
 And then run ```ls```. You should see a ```host``` repertory. Now run
 
-```
+{% highlight bash %}
 # On your container
 ls /host
-```
+{% endhighlight %}
+
  you should see every files that are in your home directory of your host machine. You are now sharing files between your host machine and your ubuntu container. Be careful, you can add modify or remove file on your container, it will also change your host directory, these are the same files, this is not a copy!!!
 
 Lets say you want to run a container for your website, just use the following :
 
-```
+{% highlight bash %}
 # On your host machine
 cd /to/your/project/folder
 docker run -d -p 9000:80 -v $PWD:/usr/share/nginx/html/ nginx
-```
+{% endhighlight %}
 
-And you can access your website at http://localhost:9000/.
+And you can access your website at [http://localhost:9000/](http://localhost:9000/).
 
 ### Manage your containers
 
 You can see all your running containers on your host machine using :
 
-```
+{% highlight bash %}
 docker ps
-```
+{% endhighlight %}
 
 Kill or stop your containers using:
 
-```
+{% highlight bash %}
 docker stop <CONTAINER_ID>
 # Or
 docker kill <CONTAINER_ID>
-```
+{% endhighlight %}
 When you kill or stop a container, it will go in the "stop" state. You can see all containers (running and stopped) using the ```-a``` option. You can bring back a stopped container using:
 
-```
+{% highlight bash %}
 docker start <CONTAINER_ID>
-```
+{% endhighlight %}
 
 Or you can delete a container using:
 
-```
+{% highlight bash %}
 docker rm <CONTAINER_ID>
-```
+{% endhighlight %}
 
 ### Dockerfile
 
@@ -127,7 +128,7 @@ You can write a script in order to define your container environment. This scrip
 
 Lets create a file, call it "Dockerfile". And write the following into it:
 
-```
+{% highlight bash %}
 FROM ubuntu
 MAINTAINER your_name VERSION 1.0
 
@@ -142,32 +143,33 @@ RUN apt-get install iputils-ping -y
 
 #The command we are going to execute when running our container
 CMD bash
-```
+{% endhighlight %}
 
 And then, we are going to build an image named "my_ubuntu" from your Dockerfile:
 
-```
+{% highlight bash %}
 docker build -t my_ubuntu .
-```
+{% endhighlight %}
 
 Now, check that you have an image called "my_ubuntu":
 
-```
+{% highlight bash %}
 docker images | grep ubuntu
-```
+{% endhighlight %}
 
 You should see at least two lines. One image called "ubuntu" which is the official image that we use previously and your new image "my_ubuntu". Now create and run a container using my_ubuntu:
 
-```
+{% highlight bash %}
 docker run -it my_ubuntu
-```
+{% endhighlight %}
 
 You don't need to add a "bash" since we mentioned it in our Dockerfile. You are now running a shell instance on a Ubuntu with ```ping```, ```nano```, ```vim``` installed 😊.
 
 ### Create an image for your website
 
 Create a ```Dockerfile``` in your website path.
-```
+
+{% highlight bash %}
 FROM nginx
 MAINTAINER your_name VERSION 1.0
 
@@ -176,23 +178,23 @@ COPY ./ /usr/share/nginx/html/
 
 # Open the container port on which your app is running
 EXPOSE 80
-```
+{% endhighlight %}
 
 And run
 
-```
+{% highlight bash %}
 docker build -t my_website .
-```
+{% endhighlight %}
 
 And finally
 
-```
+{% highlight bash %}
 docker run -d -p 8080:80 my_website
-```
+{% endhighlight %}
 
-And go to http://localhost:8080/ to see your website.
+And go to [http://localhost:8080/](http://localhost:8080/) to see your website.
 
 
 ## Where to go from here
 
-You know how to manipulate containers and how to create custom images using Dockerfile. A lot of images have already been created. You can find them there (https://hub.docker.com). You can deploy simple application with that, but how do we deploy an app that use a database and a REST API and make those two instance communicate? We have to use ```docker-compose``` to do so. I will write an article on this topic A.S.A.P.
+You know how to manipulate containers and how to create custom images using Dockerfile. A lot of images have already been created. You can find them [there](https://hub.docker.com). You can deploy simple application with that, but how do we deploy an app that use a database and a REST API and make those two instance communicate? We have to use ```docker-compose``` to do so. I will write an article on this topic A.S.A.P.
